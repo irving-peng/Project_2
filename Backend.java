@@ -48,7 +48,9 @@ public class Backend extends RedBlackTree<Delivery>{
 
     
     public boolean containsDate(Date deliveryDate){
-        return false;
+        Delivery del = new Delivery();
+        del.setOrderDate(deliveryDate);
+        return contains(del);
     }
 
 }
