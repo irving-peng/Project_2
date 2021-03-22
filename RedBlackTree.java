@@ -357,6 +357,40 @@ public class RedBlackTree<T extends Comparable<T>> {
         }
     }
 
+
+    //finds the object in the tree that matches data and returns it
+    public T get(T data) {
+        // null references will not be stored within this tree
+        if(data == null) throw new NullPointerException(
+            "This RedBlackTree cannot store null references.");
+        return this.getHelper(data, root);
+    }
+    /**
+     * Recursive helper method that recurses through the tree and looks
+     * for the value *data*.
+     * @param data the data value to look for
+     * @param subtree the subtree to search through
+     * @return the data value that is found.
+     */
+    private T getHelper(T data, Node<T> subtree) {
+        if (subtree == null) {
+            // we are at a null child, value is not in tree
+            throw new NoSuchElementException("Data not found.");
+        } else {
+            int compare = data.compareTo(subtree.data);
+            if (compare < 0) {
+                // go left in the tree
+                return getHelper(data, subtree.leftChild);
+            } else if (compare > 0) {
+                // go right in the tree
+                return getHelper(data, subtree.rightChild);
+            } else {
+                // we found it :)
+                return subtree.data;
+            }
+        }
+    }
+
     /**
      * Returns an iterator over the values in in-order (sorted) order.
      * @return iterator object that traverses the tree in in-order sequence
