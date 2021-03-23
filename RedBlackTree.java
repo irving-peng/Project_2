@@ -94,8 +94,8 @@ public class RedBlackTree<T extends Comparable<T>> {
         else{
             boolean returnValue = insertHelper(newNode,root); // recursively insert into subtree
             if (returnValue) size++;
-	    else throw new IllegalArgumentException(
-	    	"This RedBlackTree already contains that value.");
+	    //else throw new IllegalArgumentException(
+	   // 	"This RedBlackTree already contains that value.");
             root.isBlack = true;
             return returnValue;
         }
@@ -359,7 +359,7 @@ public class RedBlackTree<T extends Comparable<T>> {
 
 
     //finds the object in the tree that matches data and returns it
-    public T get(T data) {
+    public T get(T data){
         // null references will not be stored within this tree
         if(data == null) throw new NullPointerException(
             "This RedBlackTree cannot store null references.");
