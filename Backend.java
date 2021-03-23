@@ -52,14 +52,12 @@ public class Backend extends RedBlackTree<Delivery>{
     public Delivery getDelivery(String itemName) throws NoSuchElementException{
         Iterator<Delivery> rbIter = rbtree.iterator();
         Delivery del = rbIter.next();
-        System.out.println(del.getItemName());
         while(true){
             if(del.getItemName().equals(itemName)){
                 return del;
             }
             try{
                 del = rbIter.next();
-                System.out.println(del.getItemName());
             }
             catch(NoSuchElementException e){
                 throw new NoSuchElementException("Delivery Item Not Found");
