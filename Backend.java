@@ -67,13 +67,28 @@ public class Backend extends RedBlackTree<Delivery>{
         
     }
 
-
     //get the delivery object based on the order date
     //we will assume there can only be one order per order date
     public Delivery getDelivery(Date orderDate){
         Delivery del = new Delivery("item", 10, 10, "53151", null, orderDate);
-        return rbtree.get(del);
+        try{
+            return rbtree.get(del);
+        }
+        catch(NoSuchElementException e){
+            throw new NoSuchElementException("Delivery Item Not Found");
+        }
     }
+
+    @Override
+    public int size(){
+        return rbtree.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
 
     public boolean containsItem(String itemName){
         try{

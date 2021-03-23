@@ -1,7 +1,6 @@
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 public class BackendDeveloperTests {
 
@@ -16,6 +15,7 @@ public class BackendDeveloperTests {
     public void runTests(){
         System.out.println("Test Get Delivery By Name: " + testGetDeliveryByName());
         System.out.println("Test Get Delivery By Date: " + testGetDeliveryByDate());
+        System.out.println("Test Both Constructors: " + testBothConstructors());
 
     }
 
@@ -26,12 +26,13 @@ public class BackendDeveloperTests {
             backend = new Backend(DataDeliveryReader.getDeliveryObjects(path));
         }
         catch(Exception e){
+            System.out.print(e.getMessage());
             return false;
         }
         Delivery d = null;
         d = backend.getDelivery("Delivery01");
         
-        if(d.getItemName()=="Delivery01" && d.getLocationToDeliver()=="39360"){
+        if(d.getItemName().equals("Delivery01") && d.getLocationToDeliver().equals("39360")){
             return true;
         }
         else{
@@ -42,25 +43,52 @@ public class BackendDeveloperTests {
 
     public boolean testGetDeliveryByDate(){
         Backend backend;
+        Date date;
         try{
             Path path = Paths.get("FinalData.csv");
             backend = new Backend(DataDeliveryReader.getDeliveryObjects(path));
+            SimpleDateFormat dateInit = new SimpleDateFormat("dd/MM/yyyy");
+            date = dateInit.parse("01/11/2021");
         }
         catch(Exception e){
+            System.out.print(e.getMessage());
             return false;
         }
         Delivery d = null;
-        Date date = new Date();
-        date.setMonth(11);
-        date.setDate(1);
-        date.setYear(2021);
-
         d = backend.getDelivery(date);
-        if(d.getItemName()=="Delivery02" && d.getFeeDelivery()==5){
+        if(d.getItemName().equals("Delivery02") && d.getFeeDelivery()==5){
             return true;
         }
         else{
             return false;
         }
     }
-}
+
+    public boolean testBothConstructors(){
+        Backend backend1;
+        Backend backend2;
+        try{
+            Path path = Paths.get("FinalData.csv");
+            backend1 = new Backend(DataDeliveryReader.getDeliveryObjects(path));
+        }
+        catch(Exception e){
+            System.out.print(e.getMessage());
+            return false;
+        }
+        try{
+            backend2 = new Backend("FinalData.csv");
+        }
+        catch(Exception e){
+            System.out.print(e.getMessage());
+            return false;
+        }
+
+        if(backend1.size()==50 && backend2.size()==50){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+}   
