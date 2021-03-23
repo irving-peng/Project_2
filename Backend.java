@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -19,6 +23,19 @@ public class Backend extends RedBlackTree<Delivery>{
             rbtree.insert(del);
         }
 	}
+
+    public Backend(String filepath) throws IOException, ParseException{
+        Path path = Paths.get(filepath);
+        List<Delivery> list = DataDeliveryReader.getDeliveryObjects(path);
+        rbtree = new RedBlackTree<Delivery>();
+    
+        for(Delivery del : list){
+            c.setTime(del.getOrderDate());
+            c.add(Calendar.DATE, del.getDaysToDeliver());
+            del.setDeliverOnDate(c.getTime());
+            rbtree.insert(del);
+        }
+    }
 
     //add a delivery to the catalog
     public void addDelivery(Delivery del){
