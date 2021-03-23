@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -111,6 +112,11 @@ public class Backend extends RedBlackTree<Delivery>{
         return true;
     }
 
+    public String dateToString(Date date){
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String result = df.format(date);
+        return result;
+    }
     @Override
     public String toString() {
         // use the inorder Iterator that we get by calling the iterator method above
@@ -123,13 +129,13 @@ public class Backend extends RedBlackTree<Delivery>{
             data = treeNodeIterator.next();
             sb.append(data.getItemName());
             sb.append(", ");
-            sb.append(data.getOrderDate().toString());
+            sb.append(dateToString(data.getOrderDate()));
             sb.append("\n");
         while (treeNodeIterator.hasNext()) {
             data = treeNodeIterator.next();
             sb.append(data.getItemName());
             sb.append(", ");
-            sb.append(data.getOrderDate().toString());
+            sb.append(dateToString(data.getOrderDate()));
             sb.append("\n");
         }
         return sb.toString();
