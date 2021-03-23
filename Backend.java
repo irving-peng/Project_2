@@ -1,15 +1,15 @@
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 public class Backend extends RedBlackTree<Delivery>{
 
-    RedBlackTree<Delivery> rbtree;
+    private RedBlackTree<Delivery> rbtree;
     Calendar c = Calendar.getInstance();
 	
     //create red black tree from provided list of deliveries 
-	public Backend(ArrayList<Delivery> list) {
+	public Backend(List<Delivery> list) {
 		rbtree = new RedBlackTree<Delivery>();
         
         for(Delivery del : list){
@@ -32,27 +32,31 @@ public class Backend extends RedBlackTree<Delivery>{
     }
 
     //get the delivery object based on the item name
-    public Delivery getDelivery(String itemName){
-        Delivery del;
+    public Delivery getDelivery(String itemName) throws NoSuchElementException{
+        Iterator<Delivery> rbIter = rbtree.iterator();
+        Delivery del = rbIter.next();
+        System.out.println(del.getItemName());
         while(true){
-            try{
-                del = rbtree.iterator().next();
-            }
-            catch(NoSuchElementException e){
-                break;
-            }
-            if(del.getItemName()==itemName){
+            if(del.getItemName().equals(itemName)){
                 return del;
             }
+            try{
+                del = rbIter.next();
+                System.out.println(del.getItemName());
+            }
+            catch(NoSuchElementException e){
+                throw new NoSuchElementException("Delivery Item Not Found");
+            }
+
         }
-        throw new NoSuchElementException("Delivery Item Not Found");
+        
     }
+
 
     //get the delivery object based on the order date
     //we will assume there can only be one order per order date
     public Delivery getDelivery(Date orderDate){
         Delivery del = new Delivery("item", 10, 10, "53151", null, orderDate);
-        del.setOrderDate(orderDate);
         return rbtree.get(del);
     }
 
