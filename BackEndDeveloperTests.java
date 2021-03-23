@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.Date;
 public class BackendDeveloperTests {
 
-    public static void main(String[] args) throws IOException, ParseException{
+    public static void main(String[] args){
 
 
         (new BackendDeveloperTests()).runTests();
