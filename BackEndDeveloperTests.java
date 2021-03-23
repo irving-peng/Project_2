@@ -9,7 +9,6 @@ public class BackendDeveloperTests {
 
         (new BackendDeveloperTests()).runTests();
     
-        
     }
 
     public void runTests(){
@@ -91,4 +90,27 @@ public class BackendDeveloperTests {
         }
     }
 
+
+    public boolean testRedundancies(){
+        Backend backend;
+        Date date;
+        try{
+            Path path = Paths.get("FinalData.csv");
+            backend = new Backend(DataDeliveryReader.getDeliveryObjects(path));
+            SimpleDateFormat dateInit = new SimpleDateFormat("dd/MM/yyyy");
+            date = dateInit.parse("01/11/2021");
+        }
+        catch(Exception e){
+            System.out.print(e.getMessage());
+            return false;
+        }
+        Delivery d = null;
+        d = backend.getDelivery(date);
+        if(d.getItemName().equals("Delivery02") && d.getFeeDelivery()==5){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }   

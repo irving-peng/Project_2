@@ -111,6 +111,25 @@ public class Backend extends RedBlackTree<Delivery>{
         return true;
     }
 
+    @Override
+    public String toString() {
+        // use the inorder Iterator that we get by calling the iterator method above
+        // to generate a string of all values of the tree in (ordered) in-order
+        // traversal sequence
+        Iterator<Delivery> treeNodeIterator = rbtree.iterator();
+        StringBuffer sb = new StringBuffer();
+        sb.append("[ ");
+        if (treeNodeIterator.hasNext())
+            sb.append(treeNodeIterator.next().getItemName());
+        while (treeNodeIterator.hasNext()) {
+            String data = treeNodeIterator.next().getItemName();
+            sb.append(", ");
+            sb.append(data.toString());
+        }
+        sb.append(" ]");
+        return sb.toString();
+    }
+
 
 
 }

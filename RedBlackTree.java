@@ -84,7 +84,7 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @throws IllegalArgumentException when the newNode and subtree contain
      *      equal data references
      */
-    public boolean insert(T data) throws NullPointerException, IllegalArgumentException {
+    public boolean insert(T data) throws NullPointerException, IllegalArgumentException{
         // null references cannot be stored within this tree
         if(data == null) throw new NullPointerException(
             "This RedBlackTree cannot store null references.");
@@ -271,37 +271,8 @@ public class RedBlackTree<T extends Comparable<T>> {
     
     public static void main(String[] args) {
     	
-    	RedBlackTree<Integer> tree = new RedBlackTree<Integer>();
-    	tree.insert(1);
-    	System.out.println("1 is added!");
-    	tree.insert(2);
-    	System.out.println("2 is added!");
-    	System.out.println(tree.root);//
-    	tree.insert(4);
-    	System.out.println("4 is added!");
-    	System.out.println(tree.root);//
-    	
-    	//System.out.println(tree.root.leftChild.isBlack);
-    	
-    	tree.insert(6);
-    	System.out.println("6 is added!");
-    	System.out.println(tree.root);//
-    	
-    	tree.insert(3);
-    	System.out.println("3 is added!");
-    	System.out.println(tree.root);//
-
-    	tree.insert(5);
-    	System.out.println("5 is added!");
-    	System.out.println(tree.root);//
-    	
-    	tree.insert(7);
-    	tree.insert(8);
-		System.out.println(tree.root);
-		
-    	
-		
     } 
+
 
     /**
      * Get the size of the tree (its number of nodes).
