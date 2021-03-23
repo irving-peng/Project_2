@@ -25,15 +25,15 @@ public class RedBlackTree<T extends Comparable<T>> {
      * the parent, left, and right child references are always maintained.
      */
     protected static class Node<T> {
-    	//new field
-    	public boolean isBlack;
+      //new field
+      public boolean isBlack;
         public T data;
         public Node<T> parent; // null for root node
         public Node<T> leftChild; 
         public Node<T> rightChild; 
         public Node(T data) {
-        	this.isBlack = false;
-        	this.data = data; 
+          this.isBlack = false;
+          this.data = data; 
         }
         /**
          * @return true when this node has a parent and is the left child of
@@ -94,8 +94,8 @@ public class RedBlackTree<T extends Comparable<T>> {
         else{
             boolean returnValue = insertHelper(newNode,root); // recursively insert into subtree
             if (returnValue) size++;
-	    else throw new IllegalArgumentException(
-	    	"This RedBlackTree already contains that value.");
+      else throw new IllegalArgumentException(
+        "This RedBlackTree already contains that value.");
             root.isBlack = true;
             return returnValue;
         }
@@ -152,125 +152,125 @@ public class RedBlackTree<T extends Comparable<T>> {
      */
     private void rotate(Node<T> child, Node<T> parent) throws IllegalArgumentException {
         // TODO: Implement this method.
-    	//when the provides node is the left child
-    	if(child.equals(parent.leftChild)) {
-    		//swap the this node and the parent
-    		if(root == parent) {
-    			root = child;
-    		}
-    		if(parent.parent != null) {
-    			//parent has a parent
-    			if(parent.equals(parent.parent.leftChild))
-    				parent.parent.leftChild = child;
-    			else
-    				parent.parent.rightChild = child;
-    		}
-    		//change the parent of child and parent
-    		child.parent = parent.parent;
-    		parent.parent = child;
-    		//change subtree's parent
-    		if(child.leftChild != null) {
-    			if(child.rightChild != null) {
-    				child.rightChild.parent = parent;
-    			}
-    		}
-    		//change the subtree of node and parent
-    		parent.leftChild = child.rightChild;//change parent's left child to become the right subtree of child
-    		child.rightChild = parent;//change the child's right tree to become the parent
-    		return;
-    	}
-    	//when the provided node is the right child
-    	if(child.equals(parent.rightChild)) {
-    		if(root == parent) {
-    			root = child;
-    		}
-    		//same but in inverse direction
-    		if(parent.parent != null) {
-    			//parent has a parent
-    			if(parent.equals(parent.parent.leftChild))
-    				parent.parent.leftChild = child;
-    			else
-    				parent.parent.rightChild = child;
-    		}
-    		//change parent
-    		child.parent = parent.parent;
-    		parent.parent = child;
-    		//change subtree parent
-    		if(child.leftChild != null) {
-    			if(child.leftChild != null) {
-    				child.leftChild.parent = parent;
-    			}
-    		}
-    		// change child
-    		parent.rightChild = child.leftChild;
-    		child.leftChild = parent;
-    		return; 
-    	}
-    	//neither way
-    	throw new IllegalArgumentException();
+      //when the provides node is the left child
+      if(child.equals(parent.leftChild)) {
+        //swap the this node and the parent
+        if(root == parent) {
+          root = child;
+        }
+        if(parent.parent != null) {
+          //parent has a parent
+          if(parent.equals(parent.parent.leftChild))
+            parent.parent.leftChild = child;
+          else
+            parent.parent.rightChild = child;
+        }
+        //change the parent of child and parent
+        child.parent = parent.parent;
+        parent.parent = child;
+        //change subtree's parent
+        if(child.leftChild != null) {
+          if(child.rightChild != null) {
+            child.rightChild.parent = parent;
+          }
+        }
+        //change the subtree of node and parent
+        parent.leftChild = child.rightChild;//change parent's left child to become the right subtree of child
+        child.rightChild = parent;//change the child's right tree to become the parent
+        return;
+      }
+      //when the provided node is the right child
+      if(child.equals(parent.rightChild)) {
+        if(root == parent) {
+          root = child;
+        }
+        //same but in inverse direction
+        if(parent.parent != null) {
+          //parent has a parent
+          if(parent.equals(parent.parent.leftChild))
+            parent.parent.leftChild = child;
+          else
+            parent.parent.rightChild = child;
+        }
+        //change parent
+        child.parent = parent.parent;
+        parent.parent = child;
+        //change subtree parent
+        if(child.leftChild != null) {
+          if(child.leftChild != null) {
+            child.leftChild.parent = parent;
+          }
+        }
+        // change child
+        parent.rightChild = child.leftChild;
+        child.leftChild = parent;
+        return; 
+      }
+      //neither way
+      throw new IllegalArgumentException();
     }
     /**
      * This served as a helper method to maintain the RedBlackTree properties when a new red node is inserted into the tree
      * @param redNode : the newly added red node, which need to be moved and color-swap to maintain the RedBlackTree property
      */
     private void enforceRBTreePropertiesAfterInsert(Node<T> redNode) {
-    	//no violation, method is over
-    	if(redNode.parent.isBlack == true) {return;}
-    	//initialize a variable to trace the parent's sibling
-    	Node<T> parentSibling;
-    	if(redNode.parent.isLeftChild()) {
-    		parentSibling = redNode.parent.parent.rightChild;
-    	}
-    	else {
-    		parentSibling = redNode.parent.parent.leftChild;
-    	}
-    	//parent sibling is null
-    	if(parentSibling == null) {
-    		// if the null node is on the same side of the redNode, the redNode and it's parent should be swapped
-    		if((redNode.isLeftChild() == true && redNode.parent.parent.leftChild == null) || 
-    				(redNode.isLeftChild() == false && redNode.parent.parent.rightChild == null)) {
-					rotate(redNode,redNode.parent);
-	    			redNode.isBlack = true;
-	        		redNode.parent.isBlack = false;
-	    			rotate(redNode, redNode.parent);
-	    			return;
-			}
-    		redNode.isBlack = true;
-    		redNode.parent.isBlack = false;
-    		rotate(redNode.parent, redNode.parent.parent);
-    		return;
-    	}
-    	//parents's sibling is Black 
-    	if(parentSibling.isBlack == true) {
-    	//case 1: parent's sibling is on the opposite side from violating node
-    		if(redNode.isLeftChild() != parentSibling.isLeftChild()) {
-    			redNode.parent.isBlack = true;
-        		redNode.parent.parent.isBlack = false;
-    			rotate(redNode.parent, redNode.parent.parent);
-    			return;
-    		}
-    	//case 2: parent's sibling is on the same side from the violating node
-    		else {
-    			rotate(redNode,redNode.parent);
-    			redNode.isBlack = true;
-        		redNode.parent.isBlack = false;
-    			rotate(redNode, redNode.parent);
-    			return;
-    		}
-    	}
-    	//parent's sibling is Red
-    	if(parentSibling.isBlack == false) {
-    		redNode.parent.isBlack = true;
-    		parentSibling.isBlack = true;
-    		redNode.parent.parent.isBlack = false;
-    		if(redNode.parent.parent == this.root)
-    			return;
-    		enforceRBTreePropertiesAfterInsert(redNode.parent.parent);
-    	}
+      //no violation, method is over
+      if(redNode.parent.isBlack == true) {return;}
+      //initialize a variable to trace the parent's sibling
+      Node<T> parentSibling;
+      if(redNode.parent.isLeftChild()) {
+        parentSibling = redNode.parent.parent.rightChild;
+      }
+      else {
+        parentSibling = redNode.parent.parent.leftChild;
+      }
+      //parent sibling is null
+      if(parentSibling == null) {
+        // if the null node is on the same side of the redNode, the redNode and it's parent should be swapped
+        if((redNode.isLeftChild() == true && redNode.parent.parent.leftChild == null) || 
+            (redNode.isLeftChild() == false && redNode.parent.parent.rightChild == null)) {
+          rotate(redNode,redNode.parent);
+            redNode.isBlack = true;
+              redNode.parent.isBlack = false;
+            rotate(redNode, redNode.parent);
+            return;
+      }
+        redNode.isBlack = true;
+        redNode.parent.isBlack = false;
+        rotate(redNode.parent, redNode.parent.parent);
+        return;
+      }
+      //parents's sibling is Black 
+      if(parentSibling.isBlack == true) {
+      //case 1: parent's sibling is on the opposite side from violating node
+        if(redNode.isLeftChild() != parentSibling.isLeftChild()) {
+          redNode.parent.isBlack = true;
+            redNode.parent.parent.isBlack = false;
+          rotate(redNode.parent, redNode.parent.parent);
+          return;
+        }
+      //case 2: parent's sibling is on the same side from the violating node
+        else {
+          rotate(redNode,redNode.parent);
+          redNode.isBlack = true;
+            redNode.parent.isBlack = false;
+          rotate(redNode, redNode.parent);
+          return;
+        }
+      }
+      //parent's sibling is Red
+      if(parentSibling.isBlack == false) {
+        redNode.parent.isBlack = true;
+        parentSibling.isBlack = true;
+        redNode.parent.parent.isBlack = false;
+        if(redNode.parent.parent == this.root)
+          return;
+        enforceRBTreePropertiesAfterInsert(redNode.parent.parent);
+      }
     }
     
     public static void main(String[] args) {
-    	
+      
     } 
 
 

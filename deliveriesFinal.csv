@@ -1,0 +1,5 @@
+Name,LocationToDeliver,deliveryFee,DaysToDeliver,DeliverOnDate,OrderDate,Key1,Key2,Key3
+Item1,Somewhere,100,10,03/09/2021,03/09/2021,Item1Key1,Item1Key2,Item1Key3
+Item2,Somewhere else(2),200,20,14/07/2021,14/07/2021,Item2Key1,Item2Key2,Item2Key3
+item3,Somewhere again(3),300,30,11/11/2021,11/11/2021,item3Key1,item3Key2,item3Key3
+item4,Somewhere new(4),400,40,23/05/2021,23/05/2021,item4Key1,item4Key2,item4Key3
