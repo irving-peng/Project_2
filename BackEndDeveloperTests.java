@@ -83,6 +83,7 @@ public class BackendDeveloperTests {
         }
 
         if(backend1.size()==50 && backend2.size()==50){
+            System.out.println(backend1.toString());
             return true;
         }
         else{

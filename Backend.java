@@ -118,15 +118,20 @@ public class Backend extends RedBlackTree<Delivery>{
         // traversal sequence
         Iterator<Delivery> treeNodeIterator = rbtree.iterator();
         StringBuffer sb = new StringBuffer();
-        sb.append("[ ");
+        Delivery data = null;
         if (treeNodeIterator.hasNext())
-            sb.append(treeNodeIterator.next().getItemName());
-        while (treeNodeIterator.hasNext()) {
-            String data = treeNodeIterator.next().getItemName();
+            data = treeNodeIterator.next();
+            sb.append(data.getItemName());
             sb.append(", ");
-            sb.append(data.toString());
+            sb.append(data.getOrderDate().toString());
+            sb.append("\n");
+        while (treeNodeIterator.hasNext()) {
+            data = treeNodeIterator.next();
+            sb.append(data.getItemName());
+            sb.append(", ");
+            sb.append(data.getOrderDate().toString());
+            sb.append("\n");
         }
-        sb.append(" ]");
         return sb.toString();
     }
 
