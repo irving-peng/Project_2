@@ -1,3 +1,12 @@
+// --== CS400 File Header Information ==--
+// Name: Srikar Vootkur
+// Email: svootkur@wisc.edu
+// Team: BF (Red)
+// Role: Backend Developer
+// TA: BRIANNA COCHRAN
+// Lecturer: GARY DAHL
+// Notes to Grader: <optional extra notes>
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
