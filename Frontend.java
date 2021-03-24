@@ -1,3 +1,12 @@
+// --== CS400 File Header Information ==--
+// Name: Carter Lindstrom
+// Email: cjlindstrom@wisc.edu
+// Team: BF
+// Role: Frontend Developer
+// TA: BRIANNA COCHRAN
+// Lecturer: GARY DAHL
+// Notes to Grader: <optional extra notes>
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -126,7 +135,7 @@ public class Frontend {
       while(screen.equalsIgnoreCase("dateSearch")) {
         System.out.println("You selected to search by date! Enter the order date to select your delivery. "
             + "Enter (b) to go back.\n"
-            + "Enter the date in the format of 'dd/MM/yyyy', i.e '04/02/2021'");
+            + "Enter the date in the format of 'dd/MM/yyyy', i.e '04/02/2021' as February 4th, 2021");
         String input = scnr.next();
         //System.out.println(orderDate.toString());
         if(input.equalsIgnoreCase("b")) {
